@@ -1,0 +1,538 @@
+{
+	"metrics": [
+		{
+			"fields": {
+				"available": 18401329152,
+				"available_percent": 53.68377883083077,
+				"total": 34277261312,
+				"used": 15875932160,
+				"used_percent": 46.31622116916923
+			},
+			"name": "mem",
+			"tags": {
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"load1": 0,
+				"load15": 0,
+				"load5": 0,
+				"n_cpus": 8
+			},
+			"name": "system",
+			"tags": {
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"uptime": 205442
+			},
+			"name": "system",
+			"tags": {
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"uptime_format": "2 days,  9:04"
+			},
+			"name": "system",
+			"tags": {
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"free": 249289195520,
+				"inodes_free": 0,
+				"inodes_total": 0,
+				"inodes_used": 0,
+				"total": 998744875008,
+				"used": 749455679488,
+				"used_percent": 75.0397522172013
+			},
+			"name": "disk",
+			"tags": {
+				"device": "C:",
+				"fstype": "NTFS",
+				"host": "test-host",
+				"mode": "rw",
+				"path": "\\C:"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 184937.3125,
+				"time_iowait": 0,
+				"time_irq": 3949.125,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 7294.015625,
+				"time_user": 13211.640625
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu0",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 75.34456355283308,
+				"usage_iowait": 0,
+				"usage_irq": 1.9908116385911179,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 5.359877488514548,
+				"usage_user": 17.304747320061256
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu0",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 197387.03125,
+				"time_iowait": 0,
+				"time_irq": 111.3125,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 3154.90625,
+				"time_user": 4900.84375
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu1",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 94.53125,
+				"usage_iowait": 0,
+				"usage_irq": 0,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 1.5625,
+				"usage_user": 3.90625
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu1",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 200147.15625,
+				"time_iowait": 0,
+				"time_irq": 108.890625,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 2326.34375,
+				"time_user": 2969.28125
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu2",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 98.28125,
+				"usage_iowait": 0,
+				"usage_irq": 0,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 0.625,
+				"usage_user": 1.09375
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu2",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 201239.796875,
+				"time_iowait": 0,
+				"time_irq": 121.125,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 1764.984375,
+				"time_user": 2438
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu3",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 97.50390015600624,
+				"usage_iowait": 0,
+				"usage_irq": 0.15600624024961,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 1.0920436817472698,
+				"usage_user": 1.24804992199688
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu3",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 201089.78125,
+				"time_iowait": 0,
+				"time_irq": 100.4375,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 1917.46875,
+				"time_user": 2435.53125
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu4",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 97.8125,
+				"usage_iowait": 0,
+				"usage_irq": 0,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 1.5625,
+				"usage_user": 0.625
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu4",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 202244.984375,
+				"time_iowait": 0,
+				"time_irq": 114.59375,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 1341.421875,
+				"time_user": 1856.375
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu5",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 98.90625,
+				"usage_iowait": 0,
+				"usage_irq": 0,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 0.3125,
+				"usage_user": 0.78125
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu5",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 202511.265625,
+				"time_iowait": 0,
+				"time_irq": 98.328125,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 1306.796875,
+				"time_user": 1624.703125
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu6",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 98.28125,
+				"usage_iowait": 0,
+				"usage_irq": 0,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 1.09375,
+				"usage_user": 0.625
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu6",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 200634.21875,
+				"time_iowait": 0,
+				"time_irq": 87.328125,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 1791.875,
+				"time_user": 3016.671875
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu7",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 96.40625,
+				"usage_iowait": 0,
+				"usage_irq": 0,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 1.25,
+				"usage_user": 2.34375
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu7",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"time_guest": 0,
+				"time_guest_nice": 0,
+				"time_idle": 1590191.546875,
+				"time_iowait": 0,
+				"time_irq": 0,
+				"time_nice": 0,
+				"time_softirq": 0,
+				"time_steal": 0,
+				"time_system": 20897.812499999767,
+				"time_user": 32453.046874999996
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu-total",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"usage_guest": 0,
+				"usage_guest_nice": 0,
+				"usage_idle": 94.84375000027603,
+				"usage_iowait": 0,
+				"usage_irq": 0,
+				"usage_nice": 0,
+				"usage_softirq": 0,
+				"usage_steal": 0,
+				"usage_system": 1.6210937497136797,
+				"usage_user": 3.5351562500102887
+			},
+			"name": "cpu",
+			"tags": {
+				"cpu": "cpu-total",
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"tcp_close": 0,
+				"tcp_close_wait": 8,
+				"tcp_closing": 0,
+				"tcp_established": 60,
+				"tcp_fin_wait1": 0,
+				"tcp_fin_wait2": 0,
+				"tcp_last_ack": 0,
+				"tcp_listen": 52,
+				"tcp_none": 0,
+				"tcp_syn_recv": 0,
+				"tcp_syn_sent": 1,
+				"tcp_time_wait": 8,
+				"udp_socket": 127
+			},
+			"name": "netstat",
+			"tags": {
+				"host": "test-host"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"bytes_recv": 3495498706,
+				"bytes_sent": 261671010,
+				"drop_in": 0,
+				"drop_out": 0,
+				"err_in": 0,
+				"err_out": 0,
+				"packets_recv": 3005420,
+				"packets_sent": 1005695
+			},
+			"name": "net",
+			"tags": {
+				"host": "test-host",
+				"interface": "Ethernet"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"bytes_recv": 4926,
+				"bytes_sent": 2172520,
+				"drop_in": 0,
+				"drop_out": 0,
+				"err_in": 0,
+				"err_out": 0,
+				"packets_recv": 0,
+				"packets_sent": 0
+			},
+			"name": "net",
+			"tags": {
+				"host": "test-host",
+				"interface": "vEthernet (WSL)"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"temp": 27.85
+			},
+			"name": "temp",
+			"tags": {
+				"host": "test-host",
+				"sensor": "ACPI\\ThermalZone\\TZ00_0"
+			},
+			"timestamp": 1677981220
+		},
+		{
+			"fields": {
+				"clocks_current_graphics": 1602,
+				"clocks_current_memory": 5005,
+				"clocks_current_sm": 1602,
+				"clocks_current_video": 1442,
+				"cuda_version": "11.7",
+				"driver_version": "516.94",
+				"encoder_stats_average_fps": 0,
+				"encoder_stats_average_latency": 0,
+				"encoder_stats_session_count": 0,
+				"fan_speed": 30,
+				"fbc_stats_average_fps": 0,
+				"fbc_stats_average_latency": 0,
+				"fbc_stats_session_count": 0,
+				"memory_free": 5629,
+				"memory_total": 8192,
+				"memory_used": 2449,
+				"pcie_link_gen_current": 3,
+				"pcie_link_width_current": 16,
+				"power_draw": 42.55,
+				"temperature_gpu": 47,
+				"utilization_decoder": 0,
+				"utilization_encoder": 0,
+				"utilization_gpu": 5,
+				"utilization_memory": 2
+			},
+			"name": "nvidia_smi",
+			"tags": {
+				"compute_mode": "Default",
+				"host": "test-host",
+				"index": "0",
+				"name": "NVIDIA GeForce GTX 1080",
+				"pstate": "P0",
+				"uuid": "GPU-e03238b7-98ea-3242-3f5e-c61e65294854"
+			},
+			"timestamp": 1677981220
+		}
+	]
+}

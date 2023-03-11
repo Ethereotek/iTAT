@@ -1,0 +1,21 @@
+[
+	{
+		"type":"baseCOMP",
+		"name":"system",
+		"children":[
+			{
+				"type":"baseCOMP",
+				"name":"load1",
+				"children":[
+					{
+						"type":"textDAT",
+						"name":"data",
+						"contents":{
+							"load1":-1
+						}
+					}
+				]
+			}
+		]
+	}
+]

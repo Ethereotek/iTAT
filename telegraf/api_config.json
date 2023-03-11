@@ -1,0 +1,45 @@
+{
+	"servers":[
+		{
+			"url":"http://{host}:10180/",
+			"description":"hosts the telegraf agent and arranges metrics in a table",
+			"variables":{
+				"host":{
+					"default":"localhost",
+					"description":"IP Address of the Touch instances hosting telegraf"
+				}
+			}
+		}
+		
+	],
+	"paths":{
+		"/api/system":{
+			"get":{
+				"summary":"provides system level data",
+				"responses":{
+					"404":{
+						"description":"not found"
+					}
+				}
+			},
+			"/metrics":{
+				"get":{
+					"summary":"Returns all metrics available for collection",
+					"responses":{
+						"200":{
+							"description":"Object containing metrics and descriptions"
+						}
+					}
+				},
+				"/n_cpus":{
+					"summary":"",
+					"responses":{
+						"200":{
+							"description":""
+						}
+					}
+				}
+			}
+		}
+	}
+}
