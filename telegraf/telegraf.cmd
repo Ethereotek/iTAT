@@ -3,4 +3,5 @@
 echo "Starting Telegraf..."
 cd %programfiles%\InfluxData\telegraf
 
-telegraf.exe --config iTAT.conf
+telegraf.exe --config telegraf.conf
+pause

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<script src="scripts.js"></script>
+		<!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+		<script src="C:/Users/white/AppData/Roaming/npm/node_modules/vue/dist/vue.global.js"></script>
+		<title>iTAT API</title>
+	</head>
+	<body>
+		<h1>iTAT - Integrated Telegraf Agent for TouchDesigner</h1>
+		<section id="app">
+			<h1>Metrics</h1>
+			<div class="metrics">
+				<button type="button" class="collapsible" onclick="collapse(this)">&plus; CPU</button>
+				<div class="content">
+					<div class="metrics-overview">
+						<p><a href="https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md">Telegraf CPU plugin reference</a></p>
+					</div>	
+					<div class="metrics-endpoints" v-for="endpoint in api.cpu">
+						<div class="endpoint">
+							<button type="button" class="http-method http-get">GET</button>
+							<p v-text="endpoint" class="endpoint"> </p>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="collapsible" onclick="collapse(this)">&plus; System</button>
+				<div class="content">
+					<div class="metrics-overview">
+						<p><a href="https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/README.md">Telegraf System plugin reference</a></p>
+					</div>	
+					<div class="metrics-endpoints" v-for="endpoint in api.system">
+						<div class="endpoint">
+							<button type="button" class="http-method http-get">GET</button>
+							<p v-text="endpoint" class="endpoint"> </p>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="collapsible" onclick="collapse(this)">&plus; Temperature</button>
+				<div class="content">	
+					<div class="metrics-endpoints" v-for="endpoint in api.temperature">
+						<div class="endpoint">
+							<button type="button" class="http-method http-get"> GET</button>
+							<p v-text="endpoint.url" class="endpoint"> </p>
+						</div>
+						<div><p v-text="endpoint.returns"></p></div>
+					</div>
+				</div>
+				<button type="button" class="collapsible" onclick="collapse(this)">&plus; NVIDIA</button>
+				<div class="content">	
+					<div class="metrics-endpoints" v-for="endpoint in api.nvidia">
+						<div class="endpoint">
+							<button type="button" class="http-method http-get">GET</button>
+							<p v-text="endpoint" class="endpoint"></p>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="collapsible" onclick="collapse(this)">&plus; Disk</button>
+				<div class="content">	
+					<div class="metrics-endpoints" v-for="endpoint in api.disk">
+						<div class="endpoint">
+							<button type="button" class="http-method http-get">GET</button>
+							<p v-text="endpoint" class="endpoint"> </p>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="collapsible" onclick="collapse(this)">&plus; Network Status</button>
+				<div class="content">	
+					<div class="metrics-endpoints" v-for="endpoint in api.netstat">
+						<div class="endpoint">
+							<button type="button" class="http-method http-get">GET</button>
+							<p v-text="endpoint" class="endpoint"> </p>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="collapsible" onclick="collapse(this)">&plus; Network</button>
+				<div class="content">	
+					<div class="metrics-endpoints" v-for="endpoint in api.net">
+						<div class="endpoint">
+							<button type="button" class="http-method http-get">GET</button>
+							<p v-text="endpoint" class="endpoint"> </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	
+	<script>
+		const iTAT = {
+			data(){
+				return {
+					api:{
+						"cpu":[
+							"/api/cpu/cpu{n}/metrics/time_guest/data",
+							"/api/cpu/cpu{n}/metrics/time_guest_nice/data",
+							"/api/cpu/cpu{n}/metrics/time_idle/data",
+							"/api/cpu/cpu{n}/metrics/time_iowait/data",
+							"/api/cpu/cpu{n}/metrics/time_irq/data",
+							"/api/cpu/cpu{n}/metrics/time_softirq/data",
+							"/api/cpu/cpu{n}/metrics/time_system/data",
+							"/api/cpu/cpu{n}/metrics/time_user/data",
+							"/api/cpu/cpu{n}/metrics/usage_guest_nice/data",
+							"/api/cpu/cpu{n}/metrics/usage_iowait/data",
+							"/api/cpu/cpu{n}/metrics/usage_irq/data",
+							"/api/cpu/cpu{n}/metrics/usage_nice/data",
+							"/api/cpu/cpu{n}/metrics/usage_softirq/data",
+							"/api/cpu/cpu{n}/metrics/usage_steal/data",
+							"/api/cpu/cpu{n}/metrics/usage_system/data",
+							"/api/cpu/cpu{n}/metrics/usage_user/data"
+						],
+						"system":[
+							"/api/system/metrics/load1/data",
+							"/api/system/metrics/load15/data",
+							"/api/system/metrics/load5/data",
+							"/api/system/metrics/n_cpus/data",
+							"/api/system/metrics/uptime/data",
+							"/api/system/metrics/uptime_format/data"
+						],
+						"temperature":[
+							{"url":"/api/temp/metrics/temp/data",
+						"returns":{
+							"last-updated":'<formatted timestamp',
+							"temperature-F":'<float>',
+							"temperature-C":'<float>'
+						}}
+						],
+						"nvidia":[
+							"/api/nvidia/metrics/clocks_current_graphics/data",
+							"/api/nvidia/metrics/clocks_current_memory/data",
+							"/api/nvidia/metrics/clocks_current_sm/data",
+							"/api/nvidia/metrics/clocks_current_video/data",
+							"/api/nvidia/metrics/cuda_version/data",
+							"/api/nvidia/metrics/encoder_stats_average_fps/data",
+							"/api/nvidia/metrics/encoder_stats_average_latency/data",
+							"/api/nvidia/metrics/encoder_stats_session_count/data",
+							"/api/nvidia/metrics/fan_speed/data",
+							"/api/nvidia/metrics/fbc_stats_average_fps/data",
+							"/api/nvidia/metrics/fbc_stats_session_count/data",
+							"/api/nvidia/metrics/memory_free/data",
+							"/api/nvidia/metrics/memory_total/data",
+							"/api/nvidia/metrics/memory_used/data",
+							"/api/nvidia/metrics/pcie_link_gen_current/data",
+							"/api/nvidia/metrics/pcie_link_width_current/data",
+							"/api/nvidia/metrics/power_draw/data",
+							"/api/nvidia/metrics/temperature_gpu/data",
+							"/api/nvidia/metrics/utilization_decoder/data",
+							"/api/nvidia/metrics/utilization_encoder/data",
+							"/api/nvidia/metrics/utilization_gpu/data",
+							"/api/nvidia/metrics/utilization_memory/data"
+						],
+						"disk":[
+							"/api/disk/metrics/free",
+							"/api/disk/metrics/inodes_free",
+							"/api/disk/metrics/inodes_total",
+							"/api/disk/metrics/inodes_used",
+							"/api/disk/metrics/total",
+							"/api/disk/metrics/used",
+							"/api/disk/metrics/used_percent"
+						],
+						"memory":[],
+						"network":[],
+						"netstat":[
+							"/api/netstat/metrics/tcp_close",
+							"/api/netstat/metrics/tcp_close_wait",
+							"/api/netstat/metrics/tcp_closing",
+							"/api/netstat/metrics/tcp_established",
+							"/api/netstat/metrics/tcp_fin_wait1",
+							"/api/netstat/metrics/tcp_fin_wait2",
+							"/api/netstat/metrics/tcp_last_ack",
+							"/api/netstat/metrics/tcp_listen",
+							"/api/netstat/metrics/tcp_none",
+							"/api/netstat/metrics/tcp_syn_recv",
+							"/api/netstat/metrics/tcp_syn_sent",
+							"/api/netstat/metrics/tcp_time_wait",
+							"/api/netstat/metrics/udp_socket"
+						],
+						"net":[
+							"/api/net/{interface-name}/bytes_recv",
+							"/api/net/{interface-name}/bytes_sent",
+							"/api/net/{interface-name}/drop_in",
+							"/api/net/{interface-name}/drop_out",
+							"/api/net/{interface-name}/err_in",
+							"/api/net/{interface-name}/err_out",
+							"/api/net/{interface-name}/packets_recv",
+							"/api/net/{interface-name}/packets_sent"
+						]
+					}
+				}
+			}
+		}
+
+		window.app = Vue.createApp(iTAT).mount("#app")
+	</script>
+	</body>
+</html>
