@@ -1,12 +1,10 @@
 import datetime
+import json
 import math
-
-# pretty_metrics = {
-
-# }
+import re
 
 def FormatUptime(uptime):
-	# takes posix timestamp and formats them into a datetime
+	# takes POSIX formatted uptime and formats to days, hours, minutes, seconds
 	secondsPerDay = 60*60*24
 	secondsPerHour = 60*60
 	days = math.floor(uptime/secondsPerDay)
@@ -19,6 +17,16 @@ def FormatUptime(uptime):
 	uptime = f'{days}d {hours}h {minutes}m {seconds}s'
 
 	return uptime
+
+def FormatTimestamp(timestamp):
+	# takes posix timestamp and formats them into a datetime
+	try:
+		timestamp = datetime.datetime.fromtimestamp(timestamp)
+		formatted_timestamp = timestamp.strftime('%m/%d/%Y %H:%M:%S')
+	except:
+		formatted_timestamp = "error"
+		
+	return formatted_timestamp
 
 
 def CollapseTaggedMetrics(metrics_array, metric_name, tag_key):
@@ -83,33 +91,16 @@ def CollapseMetrics(metrics_array, metric_name):
 			
 			timestamps.append(metric["timestamp"])
 	
-	max_timestamp = max(timestamps)
+	try:
+		max_timestamp = max(timestamps)
+	except:
+		max_timestamp = -1
 	collapsed_metric["timestamp"] = max_timestamp
+	collapsed_metric["timestamp_formatted"] = FormatTimestamp(max_timestamp)
 
 	return collapsed_metric
 
-
-
-# def PrettifyMetric(metric):
-# 	# ^^ the CollapseMetric can probably be used on all metrics
-# 	# even if they are not split among multiple objects
-# 	pretty_metric = {
-# 		"fields":{},
-# 		"tags":{},
-# 		"timestamp":-1
-# 	}
-
-# 	for field, value in metric["fields"].items():
-# 		pretty_metric["fields"][field] = value
 	
-# 	for tag, value in metric["tags"].items():
-# 		pretty_metric["tags"][tag] = value
-	
-# 	pretty_metric["timestamp"] = metric["timestamp"]
-
-# 	return pretty_metric
-		
-
 def ConvertTimestamp(timestamp):
 	# date = datetime.datetime.fromtimestamp(timestamp)
 	date = datetime.datetime.fromtimestamp(timestamp).strftime("%m-%d-%Y, %H:%M:%S:%p")
@@ -198,37 +189,50 @@ def ParseMemoryMetrics(mem_metrics):
 
 	return parsed_metrics
 
+
+def PostMetrics_Generic(name, generic_metrics):
+	for field, value in generic_metrics:
+		op(f'api/{name}/metrics/{field}/data').text = json.dumps({field:value})
+
 def ParseCPUMetrics(cpu_metrics):
 	return 0
 
 def PostSystemMetrics(system_metrics):
 	for field, value in system_metrics["fields"].items():
-		op(f'api/system/metrics/{field}/data').text = value
+		op(f'api/system/metrics/{field}/data').text = json.dumps({field:value})
 
 def PostMemoryMetrics(memory_metrics):
 	for field, value in memory_metrics["fields"].items():
-		op(f'api/mem/metrics/{field}/data').text = value
+		op(f'api/mem/metrics/{field}/data').text = json.dumps({field:value})
 
 def PostNVIDIAMetrics(nvidia_metrics):
 	for field, value in nvidia_metrics["fields"].items():
-		op(f'api/nvidia_smi/metrics/{field}/data').text = value
+		op(f'api/nvidia_smi/metrics/{field}/data').text = json.dumps({field:value})
 	
 def PostTempMetrics(temp_metrics):
 	for field, value in temp_metrics["fields"].items():
-		op(f'api/temp/metrics/{field}/data').text = value
+		op(f'api/temp/metrics/{field}/data').text = json.dumps({field:value})
 
 def PostNetstatMetrics(netstat_metrics):
 	for field, value in netstat_metrics["fields"].items():
-		op(f'api/netstat/metrics/{field}/data').text = value
+		op(f'api/netstat/metrics/{field}/data').text = json.dumps({field:value})
 
 def PostCPUMetrics(cpu_metrics):
-	# print(cpu_metrics)
 	for cpu, metrics in cpu_metrics.items():
 		cpu = cpu.replace("-", "_")
 		for field, value in metrics["fields"].items():
+			op(f'api/cpu/{cpu}/metrics/{field}/data').text = json.dumps({field:value})
 
-			# print(op(f'cpus/{cpu}/metrics/{field}'))
-			op(f'api/cpus/{cpu}/metrics/{field}/data').text = value
+def PostNetworkMetrics(net_metrics):
+	for iface, metrics in net_metrics.items():
+		# iface = iface.replace("-", "_")
+		iface = re.sub("[()/\- ]+", "_", iface)
+		for field, value in metrics["fields"].items():
+			op(f'api/net/{iface}/metrics/{field}/data').text = json.dumps({field:value})
+
+def PostDiskMetrics(disk_metrics):
+	for field, value in disk_metrics["fields"].items():
+		op(f'api/disk/metrics/{field}/data').text = json.dumps({field:value})
 
 def PrettifyMetrics(metrics_array):
 	pretty_metrics = {}
@@ -255,6 +259,24 @@ def PrettifyMetrics(metrics_array):
 	return pretty_metrics
 
 def PostMetrics(pretty_metrics):
+	
+	metrics = [
+		"system",
+		"mem",
+		"nvidia_smi",
+		"temp",
+		"netstat",
+		"disk"
+	]
+
 	PostSystemMetrics(pretty_metrics["system"])
 	PostNVIDIAMetrics(pretty_metrics["nvidia_smi"])
-	# PostCPUMetrics(pretty_metrics["cpu"])
+	PostCPUMetrics(pretty_metrics["cpu"])
+	PostNetstatMetrics(pretty_metrics["netstat"])
+	PostDiskMetrics(pretty_metrics["disk"])
+	PostNetworkMetrics(pretty_metrics["net"])
+
+	for m in metrics:
+		# update the last_update DAT with POSIX and date/time formatted timestamps
+		op(f'api/{m}/last_update')["POSIX", 1] = pretty_metrics[m]["timestamp"]
+		op(f'api/{m}/last_update')["formatted", 1] = pretty_metrics[m]["timestamp_formatted"]

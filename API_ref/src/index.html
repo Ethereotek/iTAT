@@ -41,9 +41,8 @@
 					<div class="metrics-endpoints" v-for="endpoint in api.temperature">
 						<div class="endpoint">
 							<button type="button" class="http-method http-get"> GET</button>
-							<p v-text="endpoint.url" class="endpoint"> </p>
+							<p v-text="endpoint" class="endpoint"> </p>
 						</div>
-						<div><p v-text="endpoint.returns"></p></div>
 					</div>
 				</div>
 				<button type="button" class="collapsible" onclick="collapse(this)">&plus; NVIDIA</button>
@@ -92,6 +91,7 @@
 				return {
 					api:{
 						"cpu":[
+							"/api/cpu/last_update",
 							"/api/cpu/cpu{n}/metrics/time_guest/data",
 							"/api/cpu/cpu{n}/metrics/time_guest_nice/data",
 							"/api/cpu/cpu{n}/metrics/time_idle/data",
@@ -110,6 +110,7 @@
 							"/api/cpu/cpu{n}/metrics/usage_user/data"
 						],
 						"system":[
+							"/api/system/last_update",
 							"/api/system/metrics/load1/data",
 							"/api/system/metrics/load15/data",
 							"/api/system/metrics/load5/data",
@@ -118,72 +119,79 @@
 							"/api/system/metrics/uptime_format/data"
 						],
 						"temperature":[
-							{"url":"/api/temp/metrics/temp/data",
-						"returns":{
-							"last-updated":'<formatted timestamp',
-							"temperature-F":'<float>',
-							"temperature-C":'<float>'
-						}}
+							"/api/temp/last_update",
+							"/api/temp/metrics/temp/data",
 						],
 						"nvidia":[
-							"/api/nvidia/metrics/clocks_current_graphics/data",
-							"/api/nvidia/metrics/clocks_current_memory/data",
-							"/api/nvidia/metrics/clocks_current_sm/data",
-							"/api/nvidia/metrics/clocks_current_video/data",
-							"/api/nvidia/metrics/cuda_version/data",
-							"/api/nvidia/metrics/encoder_stats_average_fps/data",
-							"/api/nvidia/metrics/encoder_stats_average_latency/data",
-							"/api/nvidia/metrics/encoder_stats_session_count/data",
-							"/api/nvidia/metrics/fan_speed/data",
-							"/api/nvidia/metrics/fbc_stats_average_fps/data",
-							"/api/nvidia/metrics/fbc_stats_session_count/data",
-							"/api/nvidia/metrics/memory_free/data",
-							"/api/nvidia/metrics/memory_total/data",
-							"/api/nvidia/metrics/memory_used/data",
-							"/api/nvidia/metrics/pcie_link_gen_current/data",
-							"/api/nvidia/metrics/pcie_link_width_current/data",
-							"/api/nvidia/metrics/power_draw/data",
-							"/api/nvidia/metrics/temperature_gpu/data",
-							"/api/nvidia/metrics/utilization_decoder/data",
-							"/api/nvidia/metrics/utilization_encoder/data",
-							"/api/nvidia/metrics/utilization_gpu/data",
-							"/api/nvidia/metrics/utilization_memory/data"
+							"/api/nvidia_smi/last_update",
+							"/api/nvidia_smi/metrics/clocks_current_graphics/data",
+							"/api/nvidia_smi/metrics/clocks_current_memory/data",
+							"/api/nvidia_smi/metrics/clocks_current_sm/data",
+							"/api/nvidia_smi/metrics/clocks_current_video/data",
+							"/api/nvidia_smi/metrics/cuda_version/data",
+							"/api/nvidia_smi/metrics/encoder_stats_average_fps/data",
+							"/api/nvidia_smi/metrics/encoder_stats_average_latency/data",
+							"/api/nvidia_smi/metrics/encoder_stats_session_count/data",
+							"/api/nvidia_smi/metrics/fan_speed/data",
+							"/api/nvidia_smi/metrics/fbc_stats_average_fps/data",
+							"/api/nvidia_smi/metrics/fbc_stats_session_count/data",
+							"/api/nvidia_smi/metrics/memory_free/data",
+							"/api/nvidia_smi/metrics/memory_total/data",
+							"/api/nvidia_smi/metrics/memory_used/data",
+							"/api/nvidia_smi/metrics/pcie_link_gen_current/data",
+							"/api/nvidia_smi/metrics/pcie_link_width_current/data",
+							"/api/nvidia_smi/metrics/power_draw/data",
+							"/api/nvidia_smi/metrics/temperature_gpu/data",
+							"/api/nvidia_smi/metrics/utilization_decoder/data",
+							"/api/nvidia_smi/metrics/utilization_encoder/data",
+							"/api/nvidia_smi/metrics/utilization_gpu/data",
+							"/api/nvidia_smi/metrics/utilization_memory/data"
 						],
 						"disk":[
-							"/api/disk/metrics/free",
-							"/api/disk/metrics/inodes_free",
-							"/api/disk/metrics/inodes_total",
-							"/api/disk/metrics/inodes_used",
-							"/api/disk/metrics/total",
-							"/api/disk/metrics/used",
-							"/api/disk/metrics/used_percent"
+							"/api/disk/last_update/data",
+							"/api/disk/metrics/free/data",
+							"/api/disk/metrics/inodes_free/data",
+							"/api/disk/metrics/inodes_total/data",
+							"/api/disk/metrics/inodes_used/data",
+							"/api/disk/metrics/total/data",
+							"/api/disk/metrics/used/data",
+							"/api/disk/metrics/used_percent/data"
 						],
-						"memory":[],
-						"network":[],
+						"memory":[
+							"/api/mem/last_update/data",
+							"/api/mem/metrics/available/data",
+							"/api/mem/metrics/available_percent/data",
+							"/api/mem/metrics/total/data",
+							"/api/mem/metrics/used/data",
+							"/api/mem/metrics/used_percent/data",
+
+						],
 						"netstat":[
-							"/api/netstat/metrics/tcp_close",
-							"/api/netstat/metrics/tcp_close_wait",
-							"/api/netstat/metrics/tcp_closing",
-							"/api/netstat/metrics/tcp_established",
-							"/api/netstat/metrics/tcp_fin_wait1",
-							"/api/netstat/metrics/tcp_fin_wait2",
-							"/api/netstat/metrics/tcp_last_ack",
-							"/api/netstat/metrics/tcp_listen",
-							"/api/netstat/metrics/tcp_none",
-							"/api/netstat/metrics/tcp_syn_recv",
-							"/api/netstat/metrics/tcp_syn_sent",
-							"/api/netstat/metrics/tcp_time_wait",
-							"/api/netstat/metrics/udp_socket"
+							"/api/netstat/last_update",
+							"/api/netstat/metrics/tcp_close/data",
+							"/api/netstat/metrics/tcp_close_wait/data",
+							"/api/netstat/metrics/tcp_closing/data",
+							"/api/netstat/metrics/tcp_established/data",
+							"/api/netstat/metrics/tcp_fin_wait1/data",
+							"/api/netstat/metrics/tcp_fin_wait2/data",
+							"/api/netstat/metrics/tcp_last_ack/data",
+							"/api/netstat/metrics/tcp_listen/data",
+							"/api/netstat/metrics/tcp_none/data",
+							"/api/netstat/metrics/tcp_syn_recv/data",
+							"/api/netstat/metrics/tcp_syn_sent/data",
+							"/api/netstat/metrics/tcp_time_wait/data",
+							"/api/netstat/metrics/udp_socket/data"
 						],
 						"net":[
-							"/api/net/{interface-name}/bytes_recv",
-							"/api/net/{interface-name}/bytes_sent",
-							"/api/net/{interface-name}/drop_in",
-							"/api/net/{interface-name}/drop_out",
-							"/api/net/{interface-name}/err_in",
-							"/api/net/{interface-name}/err_out",
-							"/api/net/{interface-name}/packets_recv",
-							"/api/net/{interface-name}/packets_sent"
+							"/api/net/last_update",
+							"/api/net/{interface-name}/bytes_recv/data",
+							"/api/net/{interface-name}/bytes_sent/data",
+							"/api/net/{interface-name}/drop_in/data",
+							"/api/net/{interface-name}/drop_out/data",
+							"/api/net/{interface-name}/err_in/data",
+							"/api/net/{interface-name}/err_out/data",
+							"/api/net/{interface-name}/packets_recv/data",
+							"/api/net/{interface-name}/packets_sent/data"
 						]
 					}
 				}
