@@ -26,7 +26,8 @@ You can also download and install from InfluxData's website; instructions found 
 Don't follow step 3. If you install as a service, the tox won't be able to find the correct telegraf process to kill when exiting. 
 
 ## 3	Starting Telegraf
-NOTE: You should run TouchDesigner as an administrator.
+NOTE: You must run TouchDesigner as an administrator.
+NOTE: You must have an NVIDIA graphics card; an option to run with NVIDIA metrics will come in a future update.
 To use the telegraf_agent .tox, it is preferable to drag and drop the file into the `External .tox` parameter of a baseCOMP instead of dragging the file directly into the TouchDesigner network.
 
 The metric toggle parameters found on the component do not currently have any effect, but will be used in the future to allow the user to customize what metrics are gathered. It is not recommended to change the telegraf.conf file, as there are not yet any methods for handling variations in metrics.
