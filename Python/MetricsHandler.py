@@ -20,8 +20,12 @@ def FormatUptime(uptime):
 
 def FormatTimestamp(timestamp):
 	# takes posix timestamp and formats them into a datetime
-	timestamp = datetime.datetime.fromtimestamp(timestamp)
-	formatted_timestamp = timestamp.strftime('%m/%d/%Y %H:%M:%S')
+	try:
+		timestamp = datetime.datetime.fromtimestamp(timestamp)
+		formatted_timestamp = timestamp.strftime('%m/%d/%Y %H:%M:%S')
+	except:
+		formatted_timestamp = "error"
+		
 	return formatted_timestamp
 
 
@@ -87,7 +91,10 @@ def CollapseMetrics(metrics_array, metric_name):
 			
 			timestamps.append(metric["timestamp"])
 	
-	max_timestamp = max(timestamps)
+	try:
+		max_timestamp = max(timestamps)
+	except:
+		max_timestamp = -1
 	collapsed_metric["timestamp"] = max_timestamp
 	collapsed_metric["timestamp_formatted"] = FormatTimestamp(max_timestamp)
 
@@ -211,7 +218,6 @@ def PostNetstatMetrics(netstat_metrics):
 		op(f'api/netstat/metrics/{field}/data').text = json.dumps({field:value})
 
 def PostCPUMetrics(cpu_metrics):
-	# print(cpu_metrics)
 	for cpu, metrics in cpu_metrics.items():
 		cpu = cpu.replace("-", "_")
 		for field, value in metrics["fields"].items():
@@ -253,6 +259,7 @@ def PrettifyMetrics(metrics_array):
 	return pretty_metrics
 
 def PostMetrics(pretty_metrics):
+	
 	metrics = [
 		"system",
 		"mem",

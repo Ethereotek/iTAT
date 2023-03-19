@@ -3,8 +3,10 @@
 ## Updates
 1. All documented HTTP endpoints now all return valid data
 2. The command to start the telegraf process is now run directly by the subprocess module instead of through a .cmd file, meaning it should actually start on your computer. The process object is also stored in the Telegraf extension, and terminated with a call to that object, meaning termination is now much safer. It should be noted that during testing, stopping the telelgraf process sometimes resulted in a NoneType error, however, this was likely due to reinitializing the Telegraf extension. If this occurs, telegraf can be stopped from Task Manager.
-3. POSIX and date-formatted timestamps are now available for all parent metrics
-4. The webserver now responds to the telegraf process. Previously, it returned nothing, meaning telegraf would concatenate each batch of metrics, and the TelegrafMetrics object would grow larger with each update.
+3. The unzipped telegraf folder now uses the correct pathing, so the telegraf.exe can be found.
+4. POSIX and date-formatted timestamps are now available for all parent metrics
+5. The webserver now responds to the telegraf process. Previously, it returned nothing, meaning telegraf would concatenate each batch of metrics, and the TelegrafMetrics object would grow larger with each update.
+6. The API build is delayed for the first couple of batches to account for inconsistent CPU batching. API building will be handled more elegantly in future updates.
 
 
 ## 1	Introduction

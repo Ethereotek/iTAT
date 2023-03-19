@@ -26,6 +26,7 @@ class Telegraf:
 		}
 
 		self.Telegraf_proc = None
+		self.numUpdates = 0
 
 	# starting and stopping the telegraf agent
 	def StartTelegraf(self):
@@ -57,6 +58,27 @@ class Telegraf:
 		
 		self.thisComp.store("API", False)
 	
+	#### BUILDING API TREE ####
+
+
+	def buildMetric_Generic(self, name, metric_dict):
+		ty = 0
+		self.name = name
+		self.metric_dict = metric_dict
+
+		self.metrics_base = op(self.name).create("baseCOMP", "metrics")
+		for key, val in self.metric_dict["fields"].items():
+			self.metric_comp = self.metrics_base.create("baseCOMP", key)
+			self.metric_dat = self.metric_comp.create("textDAT", "data")
+
+			data = json.dumps({key:val})
+			self.metric_dat.text = data
+
+			self.metric_comp.nodeY = ty
+			ty -= 150
+		
+		print(f'{self.name} metric has been built')
+		
 
 	#### POSTING METRICS TO THE API ####
 
@@ -84,3 +106,6 @@ class Telegraf:
 	
 	def HandleMetrics(self, new_metrics):
 		self.TelegrafMetrics = new_metrics
+		self.numUpdates += 1
+
+		return self.numUpdates
