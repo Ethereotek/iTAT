@@ -1,21 +1,14 @@
 # Telegraf for Touch
 
 ## Updates
-1. All documented HTTP endpoints now all return valid data
-2. The command to start the telegraf process is now run directly by the subprocess module instead of through a .cmd file, meaning it should actually start on your computer. The process object is also stored in the Telegraf extension, and terminated with a call to that object, meaning termination is now much safer. It should be noted that during testing, stopping the telelgraf process sometimes resulted in a NoneType error, however, this was likely due to reinitializing the Telegraf extension. If this occurs, telegraf can be stopped from Task Manager.
-3. The unzipped telegraf folder now uses the correct pathing, so the telegraf.exe can be found.
-4. POSIX and date-formatted timestamps are now available for all parent metrics
-5. The webserver now responds to the telegraf process. Previously, it returned nothing, meaning telegraf would concatenate each batch of metrics, and the TelegrafMetrics object would grow larger with each update.
-6. The API build is delayed for the first couple of batches to account for inconsistent CPU batching. API building will be handled more elegantly in future updates.
+1. Changed API service port from 10180 to 10190; this gives telegraf its own port.
+2. Moved all API management and metric parsing into Telegraf extension.
 
 
 ## 1	Introduction
-iTAT (Integrated Telegraf Agent for TouchDesigner) runs a Telegraf agent as a subprocess of TouchDesigner. Telegraf is an open source software from InfluxData that collects hardware metrics. Upon receiving the first batch of metrics, iTAT will automatically build out an HTTP API based on the host system. The API is accessible at `http://<host-IP>:10180/api/<metric url>`. The metrics are also accessible as a list of dictionaries (based on Telegraf’s JSON output), or a prettified version as a dictionary keyed by each metric name.
+iTAT (Integrated Telegraf Agent for TouchDesigner) runs a Telegraf agent as a subprocess of TouchDesigner. Telegraf is an open source software from InfluxData that collects hardware metrics. Upon receiving the first couple batches of metrics, iTAT will automatically build out an HTTP API based on the host system. The API is accessible at `http://<host-IP>:10190/api/<metric url>`. The metrics are also accessible as a list of dictionaries (based on Telegraf’s JSON output), or a prettified version as a dictionary keyed by each metric name.
 
-NOTE: This is an alpha release that has undergone minimal testing. There's a great deal of functionality that hasn't been implemented, and two extensions that need to be built out. The auto-generated HTTP API is also only half implemented, and documentation is sparse. There is no guarantee this will work properly, or even at all.
-
-NOTE: This is for Windows only ¯\\_(ツ)_/¯
-
+iTAT has only been developed and tested on Windows and currently requires an NVIDIA graphics card to start.
 
 ## 2	Installation
 To install the telegraf agent, navigate to `/iTAT/telegraf/InfluxData` and unzip the telegraf.rar; choose 'Extract to telegraf/'. Then copy and paste the InfluxData folder into your Program Files directory. Copy the whole folder, not just the contents.
@@ -28,9 +21,8 @@ Don't follow step 3. If you install as a service, the tox won't be able to find 
 ## 3	Starting Telegraf
 NOTE: You must run TouchDesigner as an administrator.
 NOTE: You must have an NVIDIA graphics card; an option to run with NVIDIA metrics will come in a future update.
-To use the telegraf_agent .tox, it is preferable to drag and drop the file into the `External .tox` parameter of a baseCOMP instead of dragging the file directly into the TouchDesigner network.
 
-The metric toggle parameters found on the component do not currently have any effect, but will be used in the future to allow the user to customize what metrics are gathered. It is not recommended to change the telegraf.conf file, as there are not yet any methods for handling variations in metrics.
+The tox can be found at `/iTAT/Build/iTAT.tox`. Simply drag and drop the telegraf_agent TOX into your network and click the `Start` button under the `Telegraf` tab
 
 ## 4	Accessing metric data
 There are two ways to access metrics. The first is through the provided Python extension:
