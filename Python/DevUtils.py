@@ -11,14 +11,17 @@ class DevUtils:
 		print("Test Func")
 
 	def Build(self):
-		self.StopTelegraf()
+		try:
+			self.StopTelegraf()
+		except AttributeError:
+			pass
 
 		self.telegraf_agent.par.Initapi.pulse()
 		self.telegraf_agent.par.Lockapi = True
 		self.telegraf_agent.op("Telegraf").par.file = ""
 		self.telegraf_agent.op("Utilities").par.file = ""
 
-		self.telegraf_agent.save("../Build/iTAT.tox")
+		self.telegraf_agent.save("Build/iTAT.tox")
 	
 	def Dev(self):
 		self.telegraf_agent.op("Telegraf").par.file = "Python/extTelegraf.py"
